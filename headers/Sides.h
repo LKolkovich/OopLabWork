@@ -1,7 +1,7 @@
 #ifndef SIDES_H
 #define SIDES_H
 
-enum Sides{
+enum Sides {
     UP, DOWN, LEFT, RIGHT
 };
 
