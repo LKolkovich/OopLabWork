@@ -9,7 +9,7 @@ class Player {
 public:
     Player();
     int health_points();
-    int set_health_points(int health_points);
+    void set_health_points(int health_points);
     int score();
     void set_score(int score);
     int x_coordinate();
@@ -19,6 +19,7 @@ public:
     void set_y_coordinate(int y);
     int speed();
     int set_speed(int speed);
+    bool doesAllive();
 
 private:
     int speed_;

@@ -11,15 +11,17 @@ Player::Player() {
     speed_ = START_SPEED;
 }
 
-int Player::set_health_points(int health_points){
+bool Player::doesAllive(){
+    return health_points_ != 0;
+}
+
+void Player::set_health_points(int health_points){
     if(health_points <= 0) {
         health_points_ = 0;
-        return 1;
     }else if(health_points >= MAX_HEALT_POINTS) {
         health_points = MAX_HEALT_POINTS;
     }
     health_points_ = health_points;
-    return 0;
 }
 
 int Player::set_speed(int speed) {
