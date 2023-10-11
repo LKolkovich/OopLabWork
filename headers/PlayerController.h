@@ -5,19 +5,17 @@
 #include "Sides.h"
 #include <utility>
 
-class PlayerController{
+class PlayerController {
 public:
-    PlayerController(Player *player);
-    int Move(Sides side, int step_count);
-    int x_coordinate();
-    int y_coordinate();
-    std::pair<int, int> get_both_coordinates();
-
+    PlayerController(Player &player);
+    int move(Sides side);
+    void add_health_points(int health_change);
+    void add_score(int score_change);
+    bool doesAllive();
+    std::pair<int, int> get_coordinates();
 
 private:
-    int x_coordinate_;
-    int y_coordinate_;
-    Player *player_;
+    Player &player_;
 };
 
 #endif

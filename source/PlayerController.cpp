@@ -3,38 +3,47 @@
 
 #include "../headers/PlayerController.h"
 
-PlayerController::PlayerController(Player *player) {
-    player_ = player;
-    x_coordinate_ = 0;
-    y_coordinate_ = 0;
+PlayerController::PlayerController(Player &player) : player_(player) {} // поменять на адрес или сделать проверку на нулптр, но лучше поменять на адре
+
+void PlayerController::add_score(int score_change) {
+    player_.set_score(player_.health_points() + score_change);
 }
 
-int PlayerController::Move(Sides side, int step_count) {
-    if(step_count <= 0)
-        return -1;
-
-    if(side == Sides::UP){
-        y_coordinate_ -= step_count;
-    }else if(side == Sides::DOWN){
-        y_coordinate_ += step_count;
-    }else if(side == Sides::LEFT){
-        x_coordinate_ -= step_count;
-    }else{
-        x_coordinate_ += step_count;
+int PlayerController::move(Sides side) {
+    int speed = player_.speed();
+    int x = player_.x_coordinate();
+    int y = player_.y_coordinate();
+    
+    switch (side) {
+    case Sides::UP:
+        y -= speed;
+        break;
+    case Sides::DOWN:
+        y += speed;
+        break;
+    case Sides::LEFT:
+        x -= speed;
+        break;
+    case Sides::RIGHT:
+        x += speed;
+        break;
     }
+
+    player_.set_coordinates(x, y);
     return 0;
 }
 
-std::pair<int, int> PlayerController::get_both_coordinates() {
-    return std::make_pair(x_coordinate_, y_coordinate_);
+void PlayerController::add_health_points(int health_change) { // сделать двумя методами: 1 для изменения хп, вторрой для проверки на живой/не живой
+// точно так же сделать в классе игрока
+    player_.set_health_points(player_.health_points() + health_change);
 }
 
-int PlayerController::x_coordinate() {
-    return x_coordinate_;
+bool PlayerController::doesAllive(){
+    return player_.doesAllive();
 }
 
-int PlayerController::y_coordinate() {
-    return y_coordinate_;
+std::pair<int, int> PlayerController::get_coordinates() {
+    return std::make_pair(player_.x_coordinate(), player_.y_coordinate());
 }
 
 #endif
