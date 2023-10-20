@@ -1,26 +1,24 @@
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wextra -pedantic -std=c++17 -g -fsanitize=address
-LDFLAGS =  -fsanitize=address
-
-SRC = 
-OBJ = $(SRC:.cc=.o)
-EXEC = main
 
 all: main
 
-main: main.o Player.o PlayerController.o
-	g++ main.o Player.o PlayerController.o -o main
+main: main.o Player.o PlayerController.o Cell.o Field.o
+	g++ main.o Player.o PlayerController.o Cell.o Field.o -o game
 
-main.o: source/main.cpp
-	g++ -c source/main.cpp
+main.o: main.cpp
+	g++ -c main.cpp
 
-Player.o: source/Player.cpp
-	g++ -c source/Player.cpp
+Player.o: player/source/Player.cpp
+	g++ -c player/source/Player.cpp
 
-PlayerController.o: source/PlayerController.cpp
-	g++ -c source/PlayerController.cpp
+PlayerController.o: player/source/PlayerController.cpp
+	g++ -c player/source/PlayerController.cpp
 
+Cell.o: field/source/Cell.cpp
+	g++ -c field/source/Cell.cpp
 
+Field.o: field/source/Field.cpp
+	g++ -c field/source/Field.cpp
 
 clean:
 	rm -rf *.o main
