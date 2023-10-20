@@ -5,7 +5,7 @@
 
 PlayerController::PlayerController(Player &player, Field &field) : player_(player), field_(field) {}
 
-void PlayerController::add_score(int score_change) {
+void PlayerController::addScore(int score_change) {
     player_.set_score(player_.score() + score_change);
 }
 
@@ -45,7 +45,7 @@ void PlayerController::set_field(Field &field) {
     field_ = field;
 }
 
-void PlayerController::add_health_points(int health_change) {
+void PlayerController::addHealthPoints(int health_change) {
     player_.set_health_points(player_.health_points() + health_change);
 }
 

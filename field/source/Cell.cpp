@@ -1,44 +1,30 @@
-//
-// Created by Leha Kolkovich on 10.10.2023.
-//
-
 #include "../headers/Cell.h"
 
-Cell::Cell() : type_(CellType::PASSABLE){}
+Cell::Cell() : passable_(true) {}
 
-Cell::Cell(CellType type) : type_(type){}
+Cell::Cell(bool passable) : passable_(passable){}
 
-Cell::Cell(const Cell& other) : type_(other.type_) {}
+Cell::Cell(const Cell& other) : passable_(other.passable_) {}
 
-Cell& Cell::operator = (const Cell& other) {
+Cell& Cell::operator= (const Cell& other) {
     Cell temp(other);
-    std::swap(type_, temp.type_);
+    std::swap(passable_, temp.passable_);
     return *this;
 }
 
-Cell::Cell(Cell&& other) : type_(other.type_) {}
+Cell::Cell(Cell&& other) : passable_(other.passable_) {}
 
-Cell& Cell::operator = (Cell&& other) {
+Cell& Cell::operator= (Cell&& other) {
     if(this != &other) {
-        std::swap(type_, other.type_);
+        std::swap(passable_, other.passable_);
     }
     return *this;
 }
 
-void Cell::set_type(CellType type) {
-    type_ = type;
-}
-
-
-
-bool Cell::isStart() const {
-    return type_ == CellType::START;
-}
-
-bool Cell::isFinish() const {
-    return type_ == CellType::FINISH;
+void Cell::set_passablity(bool passable) {
+    passable_ = passable;
 }
 
 bool Cell::isPassable() const {
-    return type_ != CellType::UNPASSABLE;
+    return passable_;
 }

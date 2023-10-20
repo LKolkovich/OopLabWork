@@ -1,7 +1,3 @@
-//
-// Created by Leha Kolkovich on 10.10.2023.
-//
-
 #ifndef CODE_FIELD_H
 #define CODE_FIELD_H
 
@@ -10,6 +6,8 @@
 
 #include "Cell.h"
 #include "Point.h"
+#include <algorithm>
+
 
 class Field {
 public:
@@ -20,29 +18,29 @@ public:
 
     Field(const Field& other);
     Field(Field&& other);
-    Field& operator = (const Field& other);
-    Field& operator = (Field&& other);
+    Field& operator= (const Field& other);
+    Field& operator= (Field&& other);
 
-    void createField();
+    void createField(const Point& size);
     void clearField();
 
     Cell& getCell(const Point& coordinates);
-    Cell& getCell(Point&& coordinates);
     void setCell(const Point& coordinates, const Cell& cell);
-    void setCell(const Point& coordinates, Cell&& cell);
-    bool doesContainsPoint(const Point& coordinates) const;
+    bool doesContainsCell(const Point& coordinates) const;
     bool isPassable(const Point& coordinates);
 
     Point& size();
     Point& finish();
     Point& start();
 
-    void set_start(const Point& coordinates);
-    void set_finish(const Point& coordinates);
+    int set_start(const Point& coordinates);
+    int set_finish(const Point& coordinates);
     void createWall(const Point& coordinates);
     void makePassable(const Point& coordinates);
 
 private:
+    void swap(Field& other);
+
     Point size_;
     Cell** field_;
     Point start_;

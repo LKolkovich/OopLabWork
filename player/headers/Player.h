@@ -3,10 +3,19 @@
 
 #include "Sides.h"
 #include "../../field/headers/Point.h"
+#define MAX_SPEED 5
+#define MAX_HEALTH_POINTS 10
+#define START_COORD 0
+#define START_SPEED 1
+
 
 class Player {
 public:
     Player();
+    Player(const Player& other);
+    Player(Player&& other);
+    Player& operator=(const Player& other);
+    Player& operator=(Player&& other);
     int health_points() const;
     void set_health_points(int health_points);
     int score() const;
@@ -24,11 +33,6 @@ private:
     int health_points_;
     int score_;
     Point coordinates_;
-    const int MAX_SPEED = 5;
-    const int MAX_HEALTH_POINTS = 10;
-    const int START_X = 0;
-    const int START_Y = 0;
-    const int START_SPEED = 1;
 };
 
 #endif

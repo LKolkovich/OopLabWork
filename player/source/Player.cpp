@@ -3,10 +3,30 @@
 
 #include "../headers/Player.h"
 
-Player::Player() : score_(0){
-    health_points_ = MAX_HEALTH_POINTS;
-    speed_ = START_SPEED;
-    coordinates_ = {START_X, START_Y};
+Player::Player() : score_(0), health_points_(MAX_HEALTH_POINTS), speed_(START_SPEED), coordinates_({START_COORD, START_COORD}){}
+
+Player::Player(Player &&other) : score_(0), health_points_(MAX_HEALTH_POINTS), speed_(START_SPEED), coordinates_({START_COORD, START_COORD}) {
+    *this = std::move(other);
+}
+
+Player& Player::operator=(Player &&other){
+    if(this != &other)
+        std::swap(score_, other.score_);
+        std::swap(health_points_, other.health_points_);
+        std::swap(speed_, other.speed_);
+        std::swap(coordinates_, other.coordinates_);
+    return *this;
+}
+
+Player::Player(const Player &other) : score_(other.score_), health_points_(other.health_points_), speed_(other.speed_), coordinates_(other.coordinates_)  {}
+
+Player& Player::operator=(const Player &other) {
+    Player temp(other);
+    std::swap(score_, temp.score_);
+    std::swap(health_points_, temp.health_points_);
+    std::swap(speed_, temp.speed_);
+    std::swap(coordinates_, temp.coordinates_);
+    return *this;
 }
 
 bool Player::doesAlive() const {

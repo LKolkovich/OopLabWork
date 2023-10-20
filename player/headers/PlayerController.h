@@ -9,8 +9,8 @@ class PlayerController {
 public:
     PlayerController(Player &player, Field &field);
     void move(Sides side);
-    void add_health_points(int health_change);
-    void add_score(int score_change);
+    void addHealthPoints(int health_change);
+    void addScore(int score_change);
     bool doesAlive();
     Point get_coordinates();
     void set_field(Field &field);
