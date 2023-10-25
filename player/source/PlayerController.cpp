@@ -2,6 +2,7 @@
 #define PLAYER_CONTROLLER_CPP
 
 #include "../headers/PlayerController.h"
+#include "../../field/headers/Field.h"
 
 PlayerController::PlayerController(Player &player, Field &field) : player_(player), field_(field) {}
 
@@ -22,22 +23,44 @@ void PlayerController::move(Sides side) {
     if(side == Sides::RIGHT || side == Sides::LEFT)
         doesChangeX = true;
 
+    Point tempCoords{0, 0};
     for(int i = 1; i <= speed; i++) {
-        if(doesChangeX && !field_.isPassable({x + i * direction_sign, y})) {
-            player_.set_coordinates(x + (i - 1) * direction_sign, y);
-            return;
-        } else if(!doesChangeX && !field_.isPassable({x, y + i * direction_sign})) {
-            player_.set_coordinates(x, y + (i - 1) * direction_sign);
-            return;
+        if(doesChangeX) {
+            tempCoords = {x + i * direction_sign, y};
+            if(!field_.isPassable(tempCoords)) {
+                set_coordinates(x + (i - 1) * direction_sign, y);
+                return;
+            }
+        } else {
+            tempCoords = {x, y + i * direction_sign};
+            if(!field_.isPassable(tempCoords)) {
+                set_coordinates(x, y + (i - 1) * direction_sign);
+                return;
+            }
         }
     }
 
-    if(doesChangeX) {
-        if(field_.isPassable({x + speed * direction_sign, y}))
-            player_.set_coordinates(x + speed * direction_sign, y);
-    } else {
-        if (field_.isPassable({x, y + speed * direction_sign}))
-            player_.set_coordinates(x, y + speed * direction_sign);
+    if(field_.isPassable(tempCoords)) {
+        player_.set_coordinates(tempCoords);
+        triggerEvent(tempCoords);
+    }
+}
+
+
+void PlayerController::set_coordinates(int x, int y) {
+    set_coordinates(Point{x, y});
+}
+
+void PlayerController::set_coordinates(Point coordinates) {
+    if(field_.isPassable(coordinates)) {
+        player_.set_coordinates(coordinates);
+        triggerEvent(coordinates);
+    }
+}
+
+void PlayerController::triggerEvent(Point coordinates) {
+    if (field_.getCell(coordinates).isEvent()) {
+        field_.getCell(coordinates).execute_event(*this);
     }
 }
 
@@ -55,6 +78,18 @@ bool PlayerController::doesAlive() {
 
 Point PlayerController::get_coordinates() {
     return player_.coordinates();
+}
+
+int PlayerController::get_health_points() const {
+    return player_.health_points();
+}
+
+int PlayerController::get_score() const {
+    return player_.score();
+}
+
+Field& PlayerController::field() const {
+    return field_;
 }
 
 #endif

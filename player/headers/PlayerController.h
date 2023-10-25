@@ -3,7 +3,9 @@
 
 #include "Player.h"
 #include <utility>
-#include "../../field/headers/Field.h"
+#include "../../field/headers/Point.h"
+
+class Field;
 
 class PlayerController {
 public:
@@ -14,8 +16,15 @@ public:
     bool doesAlive();
     Point get_coordinates();
     void set_field(Field &field);
+    void set_coordinates(Point coordinates);
+    void set_coordinates(int x, int y);
+    int get_health_points() const;
+    int get_score() const;
+    Field& field() const;
 
 private:
+    void triggerEvent(Point coordinates);
+
     Player &player_;
     Field &field_;
 };

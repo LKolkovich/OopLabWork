@@ -72,6 +72,10 @@ void Player::set_coordinates(int x, int y) {
     coordinates_.y = y;
 }
 
+void Player::set_coordinates(Point coordinates) {
+    coordinates_ = coordinates;
+}
+
 int Player::speed() const {
     return speed_;
 }

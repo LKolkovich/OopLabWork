@@ -1,0 +1,12 @@
+x_size y_size
+trap_damage
+heal_from_heal_event
+star_score
+count_of_teleports
+**
+some string with teleport destination in "x y" format
+**
+**
+some strings describing
+map using ascii symbols
+**

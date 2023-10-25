@@ -1,3 +1,6 @@
+#ifndef FIELD_CPP
+#define FIELD_CPP
+
 #include "../headers/Field.h"
 #include <algorithm>
 
@@ -48,11 +51,10 @@ Field &Field::operator= (Field &&other) {
     }
     return *this;
 }
-// написать swap, который будет вызываться в операторе и конструкторе, меняет поля местами (то же самое, что в операторе)
 
 void Field::createField(const Point& size) {
     if(size.x > MAX_SIZE || size.x < MIN_SIZE || size.y > MAX_SIZE || size.y < MIN_SIZE) {
-        throw std::invalid_argument("неверно заданы размеры поля");
+        throw std::invalid_argument("wrong size of field");
     }
 
     field_ = new Cell* [size.y];
@@ -135,6 +137,4 @@ int Field::set_finish(const Point &coordinates) {
     return 1;
 }
 
-
-// список дел: удалил гетер и сетер с rvalue, т.к. они кастятся к lvalue
-// поменял celltype на true и false для проходимости, а старт и финиш хранятся в полях поля
+#endif

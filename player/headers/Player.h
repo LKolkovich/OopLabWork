@@ -21,6 +21,7 @@ public:
     int score() const;
     void set_score(int score);
     void set_coordinates(int x, int y);
+    void set_coordinates(Point coordinates);
     void set_x_coordinate(int x);
     void set_y_coordinate(int y);
     Point coordinates() const;
