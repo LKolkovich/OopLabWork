@@ -1,7 +1,6 @@
 w UP
-s DOWN
-a LEFT
-d RIGHT
+d DOWN
+l LEFT
+r RIGHT
 q QUIT
-r START
-j SETTINGS
+s START
