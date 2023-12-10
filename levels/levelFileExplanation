@@ -1,0 +1,15 @@
+x_size y_size
+trap_damage
+heal_from_heal_event
+star_score
+count_of_teleports
+**
+some string with teleport destination in "x y" format
+**
+**
+some strings describing
+map using ascii symbols
+**
+
+file should be named "one_number_means_number_of_level.txt"
+example: "1.txt", "23.txt"
